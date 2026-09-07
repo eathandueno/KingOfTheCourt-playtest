@@ -1,9 +1,9 @@
 {
   "game": "King of the Court",
   "engine": "4.7.1",
-  "source_commit": "1f9b691bfe8219ef20978ea420be566b26017d34",
+  "source_commit": "ce8f296cd531bc67a70f63ebb6a09fa53cf379b1",
   "working_tree_modified": false,
-  "built_at": "2026-09-07T20:55:25.601889+00:00",
+  "built_at": "2026-09-07T21:45:32.374758+00:00",
   "files": {
     "index.audio.position.worklet.js": {
       "bytes": 2973,
@@ -15,15 +15,15 @@
     },
     "index.html": {
       "bytes": 5874,
-      "sha256": "255dea791e13812c56e40b6fb59ecbdc02cf9d2bc7812571e6e929dc7bc45617"
+      "sha256": "c43a3154632452829153d17b99f3f1490052a7a064b14caef01d46f2373425cf"
     },
     "index.js": {
       "bytes": 279815,
       "sha256": "68586d6daafc93c6e697b3fb258976874aa7459b8931165ebb1dc3c9614cc42c"
     },
     "index.pck": {
-      "bytes": 1158204,
-      "sha256": "9e40aa45a78befb66daf2ff80c894f438c4498faf881ec2bd741dab3380c5278"
+      "bytes": 1171532,
+      "sha256": "d22326d4e592043209ea22ceceb293c3161e7ce96092354911dcc1fab86c8aec"
     },
     "index.png": {
       "bytes": 21443,
