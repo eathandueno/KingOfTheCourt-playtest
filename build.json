@@ -1,13 +1,13 @@
 {
   "game": "King of the Court",
   "engine": "4.7.1",
-  "source_commit": "8ba91be8c635a8cf7cecf5b9b85c32cb7da0d9bb",
+  "source_commit": "da3fc6ebe32fcd3df0fb63c05b89b33f5e9889d3",
   "working_tree_modified": false,
-  "built_at": "2026-09-08T02:15:11.899336+00:00",
+  "built_at": "2026-09-08T04:44:01.425251+00:00",
   "files": {
     "court_rtc.js": {
-      "bytes": 6939,
-      "sha256": "71559806c2621923a54f56e924a7f2192d4299516a991ab1fe5faf5597d04349"
+      "bytes": 7082,
+      "sha256": "54f08fe18b0ed028052d17d1e2e72043188a77c8fd15a39183f753b296703350"
     },
     "index.audio.position.worklet.js": {
       "bytes": 2973,
@@ -18,16 +18,16 @@
       "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
     },
     "index.html": {
-      "bytes": 6332,
-      "sha256": "0c18017b94f63a39836714110e74ad0644bdfaa11a41d5c15f72ccd430df893b"
+      "bytes": 6555,
+      "sha256": "c12abaf491243277ee8a8a1a9f04fed57a5a842dd12ccb1aab9de4b90117526d"
     },
     "index.js": {
       "bytes": 279815,
       "sha256": "68586d6daafc93c6e697b3fb258976874aa7459b8931165ebb1dc3c9614cc42c"
     },
     "index.pck": {
-      "bytes": 1236656,
-      "sha256": "8b20fe72ab09b735e29b5ebe186a3727a5443cf78845883239cb783b1a711731"
+      "bytes": 1260420,
+      "sha256": "56a77fa318c6777fbb23cde29bca3297715067be4f25c2c033740a47391fc6a2"
     },
     "index.png": {
       "bytes": 21443,
@@ -38,10 +38,10 @@
       "sha256": "35116f68540ac41acf7d71ea457added91b5e960a9cca3e2acc72918eaf01277"
     },
     "peerjs.min.js": {
-      "bytes": 88024,
-      "sha256": "c1b8cb220ca9e4d2b5d14e860c524ba11cd8e0c584cd24ea03f4cdec219cff2c"
+      "bytes": 88056,
+      "sha256": "f692398cb473ab820bae68b8d11dc34067351030b1eb1ce70fb092d56ea0da9e"
     }
   },
-  "gameplay_hash": "62386370a2294816184a69dd0c1ba1c11146a8fd62417158e4c29e1a7ad6be8b",
+  "gameplay_hash": "c4d34f931865b4ca09e7cc633c7604ba6dbac75606e1c6307a6218ca99524a15",
   "network_protocol": 2
 }
