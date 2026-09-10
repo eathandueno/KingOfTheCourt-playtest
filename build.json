@@ -3,11 +3,15 @@
   "engine": "4.7.1",
   "source_commit": "7a5f62e2b0b3ce075b926075c7f65a00e71077b3",
   "working_tree_modified": true,
-  "built_at": "2026-09-10T18:56:56.483164+00:00",
+  "built_at": "2026-09-10T20:02:18.452796+00:00",
   "files": {
     "court_rtc.js": {
       "bytes": 13064,
       "sha256": "0241739b0d912cb66163160364d6350ebac9d2645a6ba3871753ab5a855b914f"
+    },
+    "court_rtc_config.json": {
+      "bytes": 4,
+      "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f"
     },
     "court_voice.js": {
       "bytes": 5972,
@@ -22,16 +26,16 @@
       "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
     },
     "index.html": {
-      "bytes": 6619,
-      "sha256": "ce6ca805989a5f63f15181596b8694d307573ff5b7a2776896b564a1a5543d76"
+      "bytes": 6834,
+      "sha256": "892b41413e03874764a2ddc6e192de0e5f48acd0b23bc0ae019d8fc6bf8c8e30"
     },
     "index.js": {
       "bytes": 279815,
       "sha256": "68586d6daafc93c6e697b3fb258976874aa7459b8931165ebb1dc3c9614cc42c"
     },
     "index.pck": {
-      "bytes": 13161592,
-      "sha256": "7017fec08fd2e6af91e17273f9bf23f8d93183a37c6129c7e8a0f81edae0d94f"
+      "bytes": 13176940,
+      "sha256": "a08ac04657c69774f981a424dfc3b089d3d4a882d22b3fbc73e896452919b95b"
     },
     "index.png": {
       "bytes": 21443,
@@ -46,6 +50,6 @@
       "sha256": "f692398cb473ab820bae68b8d11dc34067351030b1eb1ce70fb092d56ea0da9e"
     }
   },
-  "gameplay_hash": "c6beb7ddc1442864bba96a6fc92ae051311382ee2369d73f58a5eaac72b953bf",
+  "gameplay_hash": "c90116572842b9ea68d17af57accfe11911229a14b162be4860d1fd4b88de5d5",
   "network_protocol": 19
 }
