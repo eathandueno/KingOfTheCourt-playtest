@@ -1,6 +1,7 @@
 /* Opt-in, bounded 8 kHz radio voice. Godot routes every packet by authoritative proximity. */
 (() => {
   'use strict';
+  let mode="ptt", focused=true;
   let loaded=false, sent=0, received=0;
   let context, stream, node, source, pending = [], enabled = false, held = false;
   let active = false, heartbeat = 0, epoch = 0, status = 'Microphone off', muted = false;
@@ -14,7 +15,7 @@
           this.bytes.push(Math.round(128+127*Math.max(-1,Math.min(1,this.sum/this.n))));this.sum=0;this.n=0;
           if(this.bytes.length===800){this.port.postMessage(new Uint8Array(this.bytes));this.bytes=[];}}}return true;}}
     registerProcessor('court-radio',RadioCapture);`;
-  function transmitting(){return enabled && held && active && document.visibilityState==='visible' && performance.now()-heartbeat<400;}
+  function transmitting(){return enabled && (mode==="open" || held) && focused && active && document.visibilityState==='visible' && performance.now()-heartbeat<400;}
   function gate(){const on=transmitting();if(node && node._on!==on){node._on=on;node.port.postMessage(on);}if(stream)for(const t of stream.getTracks())t.enabled=on;if(!on)pending=[];}
   async function audio(){if(!context)context=new AudioContext();await context.resume();return context;}
   function clearPlayback(){for(const s of speakers.values()){for(const n of s.nodes){try{n.stop();}catch(_){}}s.nodes.clear();s.next=0;}}
@@ -30,7 +31,7 @@
       const low=ctx.createBiquadFilter();low.type='lowpass';low.frequency.value=3100;
       source.connect(high).connect(low).connect(node);const silence=ctx.createGain();silence.gain.value=0;node.connect(silence).connect(ctx.destination);
       node.port.onmessage=e=>{if(!transmitting())return;sent++;pending.push(btoa(String.fromCharCode(...e.data)));if(pending.length>3)pending.shift();};
-      enabled=true;status='Hold N · nearby players on BOTH teams hear you';gate();
+      enabled=true;status='Microphone enabled · nearby players on BOTH teams hear you';gate();
     }catch(e){disable();status=e.name==='NotAllowedError'?'Microphone permission denied · enable it in browser settings':'Microphone unavailable: '+e.name;}}
   function disable(){epoch++;enabled=false;held=false;pending=[];if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;if(node)node.disconnect();if(source)source.disconnect();node=null;source=null;status='Microphone off';}
   function play(packet){if(!context || muted || !active || silenced.has(packet.slot) || !Number.isInteger(packet.slot) || packet.slot<0 || packet.slot>3)return;
@@ -47,14 +48,14 @@
     const start=Math.max(context.currentTime+.015,s.next);n.start(start);s.next=start+.1;
   }
   window.CourtVoice=Object.freeze({enable,disable,unlock:audio,
-    tick(value){active=!!value;heartbeat=performance.now();gate();if(!active)clearPlayback();},
+    setMode(value){mode=value==="open"?"open":"ptt";held=false;gate();},
+    tick(value,pressed){held=!!pressed;active=!!value;heartbeat=performance.now();gate();if(!active)clearPlayback();},
     take(){const result=pending;pending=[];return JSON.stringify(result);},play(text){try{play(JSON.parse(text));}catch(_){}},
     mute(value){muted=!!value;if(muted)clearPlayback();},muteSeat(slot,value){if(value)silenced.add(slot);else silenced.delete(slot);clearPlayback();},
-    status(){return JSON.stringify({sent,received,enabled,transmitting:transmitting(),muted,message:status,queued:pending.length,playing:[...speakers.values()].reduce((a,s)=>a+s.nodes.size,0)});}});
-  window.addEventListener('keydown',e=>{if(e.code==='KeyN'&&!e.repeat&&!/INPUT|TEXTAREA/.test(e.target.tagName)){held=true;gate();}});
-  window.addEventListener('keyup',e=>{if(e.code==='KeyN'){held=false;gate();}});
+    status(){return JSON.stringify({mode,sent,received,enabled,transmitting:transmitting(),muted,message:status,queued:pending.length,playing:[...speakers.values()].reduce((a,s)=>a+s.nodes.size,0)});}});
   window.addEventListener('pointerdown',()=>{if(context)context.resume().catch(()=>{});});
-  window.addEventListener('blur',()=>{held=false;gate();clearPlayback();});
+  window.addEventListener('focus',()=>{focused=true;});
+  window.addEventListener('blur',()=>{focused=false;held=false;gate();clearPlayback();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){held=false;gate();clearPlayback();}});
   window.addEventListener('pagehide',disable);setInterval(gate,150);
 })();
