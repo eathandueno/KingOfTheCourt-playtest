@@ -3,7 +3,7 @@
   "engine": "4.7.1",
   "source_commit": "7a5f62e2b0b3ce075b926075c7f65a00e71077b3",
   "working_tree_modified": true,
-  "built_at": "2026-09-11T06:33:04.338729+00:00",
+  "built_at": "2026-09-11T08:59:23.143167+00:00",
   "files": {
     "court_rtc.js": {
       "bytes": 13064,
@@ -27,15 +27,15 @@
     },
     "index.html": {
       "bytes": 6834,
-      "sha256": "d944786cf872738c2da14022b02da2c26f088c77fc702be806f99898714d3a9d"
+      "sha256": "0a67c97832786c7aa53795e7e424cceaa9a318f038507cbfe01d71f184da2b51"
     },
     "index.js": {
       "bytes": 279815,
       "sha256": "68586d6daafc93c6e697b3fb258976874aa7459b8931165ebb1dc3c9614cc42c"
     },
     "index.pck": {
-      "bytes": 14236628,
-      "sha256": "7a33a7fac54bba57932dfd6c613d938e0f4056962067d22ff6ca2f373378adc2"
+      "bytes": 14345796,
+      "sha256": "efb3409b7adcdd99af6422e76fd6477000d838a287345591bd1ec0d7bafd6ecf"
     },
     "index.png": {
       "bytes": 21443,
@@ -50,6 +50,6 @@
       "sha256": "f692398cb473ab820bae68b8d11dc34067351030b1eb1ce70fb092d56ea0da9e"
     }
   },
-  "gameplay_hash": "541b03724d925a8005fe61b85418556b3ab72b4118c272c11b19b0237310adb6",
-  "network_protocol": 19
+  "gameplay_hash": "293aa91e3a93e38682f242f7559a9564d5a8ba66a022d13250246010b6821dec",
+  "network_protocol": 23
 }
