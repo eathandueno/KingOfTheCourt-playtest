@@ -2,6 +2,8 @@
 (() => {
   'use strict';
   const MAX_PACKET = 1048576, MAX_QUEUE = 2097152;
+  const CHUNK_SIZE = 2048; // JSON escaping still fits below 16 KiB per data-channel message.
+  let messageSerial = 0;
   const DEFAULT_ICE_SERVERS = [
     {urls: 'stun:stun.l.google.com:19302'}, {urls: 'stun:stun.cloudflare.com:3478'}
   ];
@@ -106,7 +108,7 @@
   function reachabilityMessage() {
     return relayEnabled ?
       'Could not reach this browser through WebRTC. Reconnect or ask the host for a fresh room.' :
-      'Could not reach this browser. This deployment has no TURN relay, so some networks need the desktop host.';
+      'Direct connection failed. This room has no relay for restrictive networks. Ask for a hosted-server invite, or retry on another network.';
   }
   function failStartup(message) {
     phase = 3; error = message;
@@ -115,7 +117,7 @@
   function close(id, reason = '') {
     const entry = connections.get(id);
     if (!entry || entry.state === 3) return;
-    entry.state = 3; entry.reason = String(reason).slice(0,180);
+    entry.assembly = null; entry.state = 3; entry.reason = String(reason).slice(0,180);
     if (entry.conn?.open && reason) {
       try { entry.conn.send(JSON.stringify({courtTransportClose: entry.reason})); } catch (_) {}
     }
@@ -135,6 +137,26 @@
     });
     conn.on('data', text => {
       if (entry.state !== 1) return;
+      // Raw RTC channels do not fragment oversized application messages for us.
+      // Reassemble one bounded, ordered snapshot before applying logical packet limits.
+      if (!host && typeof text === 'string' && text.startsWith('{"courtChunk":')) {
+        let frame;
+        try { frame = JSON.parse(text); } catch (_) { close(id,'Invalid snapshot fragment'); return; }
+        if (text.length > 13000 || !Number.isSafeInteger(frame.courtChunk) ||
+            !Number.isInteger(frame.part) || !Number.isInteger(frame.total) || frame.total < 2 ||
+            frame.total > Math.ceil(MAX_PACKET/CHUNK_SIZE) || typeof frame.text !== 'string' || frame.text.length > CHUNK_SIZE) {
+          close(id,'Invalid snapshot fragment'); return;
+        }
+        if (!entry.assembly && frame.part === 0) entry.assembly = {id:frame.courtChunk,total:frame.total,next:0,text:''};
+        const assembly = entry.assembly;
+        if (!assembly || assembly.id !== frame.courtChunk || assembly.total !== frame.total || assembly.next !== frame.part) {
+          close(id,'Snapshot fragment order mismatch'); return;
+        }
+        assembly.text += frame.text; assembly.next++;
+        if (assembly.text.length > MAX_PACKET) {close(id,'Message limit exceeded'); return;}
+        if (assembly.next < assembly.total) return;
+        text = assembly.text; entry.assembly = null;
+      } else if (entry.assembly) {close(id,'Incomplete snapshot'); return;}
       const now = performance.now();
       entry.budget = Math.min(480,entry.budget+(now-entry.seen)*.12)-1; entry.seen = now;
       if (typeof text !== 'string' || text.length > (host ? 4096 : MAX_PACKET)) {
@@ -152,7 +174,8 @@
         try {packet = JSON.parse(text);} catch (_) {return;}
         if (packet?.type === 'input') {entry.input = text; return;}
       }
-      if (!host && text.startsWith('{') && text.includes('"type":"state"')) {
+      // Delta states form an ordered chain. Only legacy independent snapshots may coalesce.
+      if (!host && text.startsWith('{') && text.includes('"type":"state"') && !text.includes('"stream_revision"')) {
         entry.snapshot = text; return;
       }
       entry.bytes += text.length;
@@ -249,7 +272,13 @@
       const c = connections.get(id);
       if (!c || c.state !== 1 || text.length > MAX_PACKET) return false;
       if ((c.conn.dataChannel?.bufferedAmount || 0) > 100000) return false;
-      try {c.conn.send(text); return true;} catch (_) {close(id,'Connection interrupted'); return false;}
+      try {
+        if (host && text.length > CHUNK_SIZE) {
+          const serial = ++messageSerial, total = Math.ceil(text.length/CHUNK_SIZE);
+          for (let part=0;part<total;part++) c.conn.send(JSON.stringify({courtChunk:serial,part,total,text:text.slice(part*CHUNK_SIZE,(part+1)*CHUNK_SIZE)}));
+        } else c.conn.send(text);
+        return true;
+      } catch (_) {close(id,'Connection interrupted'); return false;}
     },
     close,
     reconnect() {if (peer?.disconnected && !peer.destroyed) peer.reconnect();},

@@ -93,7 +93,7 @@ body {
 		
 	<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMwYTFiMjMiLz48cGF0aCBkPSJNMTAgMThsMTIgMTAgMTAtMTcgMTAgMTcgMTItMTAtNiAzMUgxNnoiIGZpbGw9IiNlZmM0NzciLz48L3N2Zz4=">
 <style>#status{background:#09191f;font-family:system-ui,sans-serif}#status-splash{display:none}#status:before{content:"KING OF THE COURT";font-size:32px;letter-spacing:2px;color:#efc477}#status:after{content:attr(data-loading-stage);margin-top:18px;color:#a7bfc5}</style>
-<script>window.COURT_BUILD="2d27826243095167"</script>
+<script>window.COURT_BUILD="c32bea3ec8d5267f"</script>
 <!-- Weapon audio attribution
 # Weapon recording credits
 
@@ -169,7 +169,7 @@ Changes: isolate cues, remove DC/low noise, resample, adjust pitch and normalize
 Exact source cuts are preserved in reload_manifest.json. No gunshot mix changed.
 
 -->
-<script src="peerjs.min.js?release=f692398cb473ab82"></script><script src="court_rtc.js?release=ffb5af490a43c89f"></script><script src="court_voice.js?release=b2ac8352408b8ed4"></script>
+<script src="peerjs.min.js?release=f692398cb473ab82"></script><script src="court_rtc.js?release=661eb9c2d9ff7483"></script><script src="court_voice.js?release=b2ac8352408b8ed4"></script><script src="court_display.js?release=0ec616f620d74514"></script>
 </head>
 	<body>
 		<canvas id="canvas">
@@ -188,7 +188,7 @@ Exact source cuts are preserved in reload_manifest.json. No gunshot mix changed.
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":148357744,"index.wasm":39513091},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":148398564,"index.wasm":39513091},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -196,7 +196,7 @@ const courtPreload = engine.preloadFile.bind(engine);
 engine.preloadFile = async (file, path) => {
     if (file !== "index.pck") return courtPreload(file, path);
     const chunks = [];
-    for (const url of ["index.pck.gz.part0?release=29c47e606fac9f89", "index.pck.gz.part1?release=29c47e606fac9f89"]) {
+    for (const url of ["index.pck.gz.part0?release=7255e298abd5815f", "index.pck.gz.part1?release=7255e298abd5815f"]) {
         const response = await fetch(url);
         if (!response.ok) throw new Error("Game download failed: " + response.status);
         chunks.push(await response.blob());

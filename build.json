@@ -3,11 +3,15 @@
   "engine": "4.7.1.stable.official.a13da4feb",
   "source_commit": "465f757d0ab7c0de14c45fd9369b6c75666a9e6d",
   "working_tree_modified": true,
-  "built_at": "2026-09-12T21:39:33.391740+00:00",
+  "built_at": "2026-09-12T23:01:17.185058+00:00",
   "files": {
+    "court_display.js": {
+      "bytes": 4251,
+      "sha256": "0ec616f620d74514f6c89b6841c5b9e59c48d889fa0714a7b1dcbe99dab75383"
+    },
     "court_rtc.js": {
-      "bytes": 13065,
-      "sha256": "ffb5af490a43c89f8e465b0015a5f386942fe8789a748fbbc1dfa94e3fc2125d"
+      "bytes": 15163,
+      "sha256": "661eb9c2d9ff74839ec201ba04e1aa71ff542024ea5eb38569373e3b9a2b444d"
     },
     "court_rtc_config.json": {
       "bytes": 4,
@@ -26,8 +30,8 @@
       "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
     },
     "index.html": {
-      "bytes": 11864,
-      "sha256": "52092880779da66acdae2776f64ba91f400ebaec3394b9796673a9c59af08d40"
+      "bytes": 11929,
+      "sha256": "9e559dd0ac4dfac649343286ab2faf5d8b43edf5e3147d336f09072b0f762dd2"
     },
     "index.js": {
       "bytes": 279815,
@@ -35,11 +39,11 @@
     },
     "index.pck.gz.part0": {
       "bytes": 67108864,
-      "sha256": "83f2b3d6bb7068bae52c86ba466bd68eb941b11b1229efe7e6378ea228a70e52"
+      "sha256": "5f19864fc7dae92d2d29b983bce696c423edde331e57ba05fc38944aa72ad992"
     },
     "index.pck.gz.part1": {
-      "bytes": 57295797,
-      "sha256": "10e12a8c8ccecd82ceea481174bb9b56718d4fc5e4d02e911b12de9ecaf1d8ce"
+      "bytes": 57330417,
+      "sha256": "52685ae03124e18b329a3f6563bb9cef26eced1653b4cd6542c6d27c8e566c78"
     },
     "index.png": {
       "bytes": 21443,
@@ -54,8 +58,8 @@
       "sha256": "f692398cb473ab820bae68b8d11dc34067351030b1eb1ce70fb092d56ea0da9e"
     }
   },
-  "gameplay_hash": "5cc8c28b846d9e82974392560cb04e61db282c06dbf97006fa30305f1510ff16",
-  "network_protocol": 50,
-  "pack_uncompressed_bytes": 148357744,
+  "gameplay_hash": "02bd116adc835ba239cf7c74e19d31da76b9225eb0199aa2265e273ca54cf0a9",
+  "network_protocol": 53,
+  "pack_uncompressed_bytes": 148398564,
   "pack_encoding": "gzip"
 }
