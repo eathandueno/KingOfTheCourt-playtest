@@ -6,6 +6,6 @@ Desktop keyboard and mouse. Click PLAY. Esc opens the menu; F1 or backtick opens
 
 This repository contains exported browser files only. Game source: https://github.com/eathandueno/KingOfTheCourt
 
-Source revision: `7a5f62e2b0b3ce075b926075c7f65a00e71077b3`
+Source revision: `465f757d0ab7c0de14c45fd9369b6c75666a9e6d`
 
 Build details and SHA-256 checksums: [build.json](build.json).

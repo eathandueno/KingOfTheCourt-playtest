@@ -194,7 +194,7 @@
       for (const callback of callbacks) callback(source);
     });
     peer.on('connection', conn => {
-      if (peer !== source || sourceSession !== generation || !host || [...connections.values()].filter(c => c.state !== 3).length >= 4) {conn.close(); return;}
+      if (peer !== source || sourceSession !== generation || !host || [...connections.values()].filter(c => c.state !== 3).length >= 10) {conn.close(); return;}
       attach(conn);
     });
     peer.on('disconnected', () => {

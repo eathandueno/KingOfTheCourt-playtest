@@ -38,7 +38,7 @@ body {
 }
 
 #status {
-	background-color: #242424;
+	background-color: #191d2a;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -93,8 +93,83 @@ body {
 		
 	<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMwYTFiMjMiLz48cGF0aCBkPSJNMTAgMThsMTIgMTAgMTAtMTcgMTAgMTcgMTItMTAtNiAzMUgxNnoiIGZpbGw9IiNlZmM0NzciLz48L3N2Zz4=">
 <style>#status{background:#09191f;font-family:system-ui,sans-serif}#status-splash{display:none}#status:before{content:"KING OF THE COURT";font-size:32px;letter-spacing:2px;color:#efc477}#status:after{content:attr(data-loading-stage);margin-top:18px;color:#a7bfc5}</style>
-<script>window.COURT_BUILD="d9729023d61eaaa0"</script>
-<script src="peerjs.min.js?release=f692398cb473ab82"></script><script src="court_rtc.js?release=0241739b0d912cb6"></script><script src="court_voice.js?release=f9c2dcaac13df9ce"></script>
+<script>window.COURT_BUILD="2d27826243095167"</script>
+<!-- Weapon audio attribution
+# Weapon recording credits
+
+## Active recorded v5 bank
+
+`recorded_v5/` replaces the v4 firing reports with individual shots from the
+CC0 Free Firearm Sound Library credited below. Processing: select microphone
+channel zero, trim onset, filter 32-17500 Hz, resample to mono 48 kHz, remove
+DC, fade boundaries and normalize to -2 dBFS. No synthesized bass, added bolt
+clicks, pitch layers, saturation or intentional clipping in these reports.
+Fictional heavy-pistol, launcher and minigun roles adapt the listed recordings;
+they are not recordings of those exact weapon models. Melee and motor/handling
+cues are copied unchanged from v4 and still contain authored synthesis.
+Originals and the v4 bank are preserved. Build with
+`tools/loop-court/build_recording_only_audio.py`; v5 manifest records source hashes.
+No new Freesound recordings were downloaded or incorporated.
+
+## Intense v4 derivatives
+
+`intense_v4/` reuses the credited local close-report banks below. Changes: pitch-shifted recorded body layers, shaped pressure/noise synthesis, mechanical transients, parallel saturation and intentional waveform clipping, followed by -2 dBFS sample-peak normalization. Non-firearm and motor layers are authored local NumPy synthesis. These are designed game effects, not claims of exact weapon-model recordings. Originals are preserved. `intense_v4/manifest.json` records exact source and output SHA-256 hashes; rebuild with `tools/loop-court/build_intense_weapon_audio.py`.
+
+Gunshot Sounds by Vincent Sevedge (Tabasco), copyright 2009:
+https://opengameart.org/content/gunshot-sounds
+
+CZ52 pistol, SKS, Mosin-Nagant and shotgun recordings from sounds.zip.
+The archive's creativecommons.txt specifies Creative Commons Attribution 3.0
+Unported: https://creativecommons.org/licenses/by/3.0/
+The website lists CC0, but we retain the archive's attribution and license terms.
+Original notice is preserved in recordings/creativecommons.txt.
+Changes: mono conversion, onset trimming, EQ, pitch adjustment, shortened decay,
+quiet reflections, saturation and layering with the game's existing sounds.
+SMG and machine-gun assets adapt pistol/rifle reports, not recordings of those
+exact automatic weapons.
+
+Gunshots by kurt, CC0:
+https://opengameart.org/content/gunshots
+Original 22 Pistol.wav and Black Powder.wav are retained as recorded_pistol.wav
+and recorded_black_powder.wav. They supply underlying body layers, including
+our previously generated sniper_heavy.wav derivative.
+
+No Bodycam game audio is included.
+
+Sniper prototype: The Free Firearm Sound Library, CC0, by Ben Jaszczak,
+Brian Nelson, Kevin Heras and Matthew Nanney.
+https://opengameart.org/content/the-free-firearm-sound-library
+https://creativecommons.org/publicdomain/zero/1.0/
+Source: Prepared SFX Library/Mosin Nagant/M_21P.wav (96 kHz, 24-bit,
+separate microphone channels). Three actual shots selected from this recording.
+Changes: select one microphone, trim, filter, downsample to 48 kHz, shape decay
+and layer the existing sniper body plus synthesized low pressure.
+
+Current full recorded blast bank (supersedes the sniper prototype):
+The Free Firearm Sound Library, CC0, same authors and source URL above.
+Selected source files: A_42P.wav and A_34P.wav (1911), G_20P.wav (Carl Gustav
+M45), D_24P.wav and D_32P.wav (AR-15), C_28P.wav (AK-47), M_21P.wav and
+M_26P.wav (Mosin-Nagant), N_26P.wav (Mossberg).
+Changes: choose microphone channel zero, trim, filter, downsample, reinforce
+recorded body frequencies, reduce late decay, add a subtle existing recorded
+body layer and normalize. No oscillator or artificial reflection taps.
+The AK-47 and Mossberg are adapted for the fictional machine-gun/cannon roles.
+
+Reload handling cues (CC0):
+Gun reload sounds by SpringySpringo:
+https://opengameart.org/content/gun-reload-sounds
+Source gunreload1.wav, assaultriflereload1_0.wav and shotguncock_0.wav.
+The creator identifies these as airsoft-gun handling recordings.
+Equipment clicks III by LFA:
+https://opengameart.org/content/equipment-clicks-iii
+Source equipment_clicks3.wav; a collection of rifle-bolt and household mechanical
+recordings. Individual edits are designed foley, not claims that every cut is
+an exact recording of the depicted weapon's mechanism.
+Changes: isolate cues, remove DC/low noise, resample, adjust pitch and normalize.
+Exact source cuts are preserved in reload_manifest.json. No gunshot mix changed.
+
+-->
+<script src="peerjs.min.js?release=f692398cb473ab82"></script><script src="court_rtc.js?release=ffb5af490a43c89f"></script><script src="court_voice.js?release=b2ac8352408b8ed4"></script>
 </head>
 	<body>
 		<canvas id="canvas">
@@ -113,12 +188,24 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":14345796,"index.wasm":39513091},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":148357744,"index.wasm":39513091},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
-GODOT_CONFIG.fileSizes["index.pck?release=efb3409b7adcdd99"] = GODOT_CONFIG.fileSizes["index.pck"];
 const engine = new Engine(GODOT_CONFIG);
+
 const courtPreload = engine.preloadFile.bind(engine);
-engine.preloadFile = (file, path) => courtPreload(file === "index.pck" ? "index.pck?release=efb3409b7adcdd99" : file, path);
+engine.preloadFile = async (file, path) => {
+    if (file !== "index.pck") return courtPreload(file, path);
+    const chunks = [];
+    for (const url of ["index.pck.gz.part0?release=29c47e606fac9f89", "index.pck.gz.part1?release=29c47e606fac9f89"]) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Game download failed: " + response.status);
+        chunks.push(await response.blob());
+    }
+    const bytes = await new Response(new Blob(chunks).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer();
+    if (bytes.byteLength !== GODOT_CONFIG.fileSizes["index.pck"]) throw new Error("Incomplete game download. Refresh to retry.");
+    return courtPreload(bytes, path || "index.pck");
+};
+
 
 (function () {
 	const statusOverlay = document.getElementById('status');

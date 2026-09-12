@@ -1,13 +1,13 @@
 {
   "game": "King of the Court",
-  "engine": "4.7.1",
-  "source_commit": "7a5f62e2b0b3ce075b926075c7f65a00e71077b3",
+  "engine": "4.7.1.stable.official.a13da4feb",
+  "source_commit": "465f757d0ab7c0de14c45fd9369b6c75666a9e6d",
   "working_tree_modified": true,
-  "built_at": "2026-09-11T08:59:23.143167+00:00",
+  "built_at": "2026-09-12T21:39:33.391740+00:00",
   "files": {
     "court_rtc.js": {
-      "bytes": 13064,
-      "sha256": "0241739b0d912cb66163160364d6350ebac9d2645a6ba3871753ab5a855b914f"
+      "bytes": 13065,
+      "sha256": "ffb5af490a43c89f8e465b0015a5f386942fe8789a748fbbc1dfa94e3fc2125d"
     },
     "court_rtc_config.json": {
       "bytes": 4,
@@ -15,7 +15,7 @@
     },
     "court_voice.js": {
       "bytes": 5972,
-      "sha256": "f9c2dcaac13df9ce711d084ccc02e2ada25dc3f06aeb17ba74f1bcea1a95951c"
+      "sha256": "b2ac8352408b8ed46b65ba2ac18a67af952101540fac76487bcfdd76eff58721"
     },
     "index.audio.position.worklet.js": {
       "bytes": 2973,
@@ -26,16 +26,20 @@
       "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
     },
     "index.html": {
-      "bytes": 6834,
-      "sha256": "0a67c97832786c7aa53795e7e424cceaa9a318f038507cbfe01d71f184da2b51"
+      "bytes": 11864,
+      "sha256": "52092880779da66acdae2776f64ba91f400ebaec3394b9796673a9c59af08d40"
     },
     "index.js": {
       "bytes": 279815,
       "sha256": "68586d6daafc93c6e697b3fb258976874aa7459b8931165ebb1dc3c9614cc42c"
     },
-    "index.pck": {
-      "bytes": 14345796,
-      "sha256": "efb3409b7adcdd99af6422e76fd6477000d838a287345591bd1ec0d7bafd6ecf"
+    "index.pck.gz.part0": {
+      "bytes": 67108864,
+      "sha256": "83f2b3d6bb7068bae52c86ba466bd68eb941b11b1229efe7e6378ea228a70e52"
+    },
+    "index.pck.gz.part1": {
+      "bytes": 57295797,
+      "sha256": "10e12a8c8ccecd82ceea481174bb9b56718d4fc5e4d02e911b12de9ecaf1d8ce"
     },
     "index.png": {
       "bytes": 21443,
@@ -50,6 +54,8 @@
       "sha256": "f692398cb473ab820bae68b8d11dc34067351030b1eb1ce70fb092d56ea0da9e"
     }
   },
-  "gameplay_hash": "293aa91e3a93e38682f242f7559a9564d5a8ba66a022d13250246010b6821dec",
-  "network_protocol": 23
+  "gameplay_hash": "5cc8c28b846d9e82974392560cb04e61db282c06dbf97006fa30305f1510ff16",
+  "network_protocol": 50,
+  "pack_uncompressed_bytes": 148357744,
+  "pack_encoding": "gzip"
 }

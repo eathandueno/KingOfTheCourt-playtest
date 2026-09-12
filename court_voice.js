@@ -34,7 +34,7 @@
       enabled=true;status='Microphone enabled · nearby players on BOTH teams hear you';gate();
     }catch(e){disable();status=e.name==='NotAllowedError'?'Microphone permission denied · enable it in browser settings':'Microphone unavailable: '+e.name;}}
   function disable(){epoch++;enabled=false;held=false;pending=[];if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;if(node)node.disconnect();if(source)source.disconnect();node=null;source=null;status='Microphone off';}
-  function play(packet){if(!context || muted || !active || silenced.has(packet.slot) || !Number.isInteger(packet.slot) || packet.slot<0 || packet.slot>3)return;
+  function play(packet){if(!context || muted || !active || silenced.has(packet.slot) || !Number.isInteger(packet.slot) || packet.slot<0 || packet.slot>9)return;
     let bytes;try{bytes=atob(packet.audio);}catch(_){return;}if(bytes.length!==800)return;
     let s=speakers.get(packet.slot);if(!s){const gain=context.createGain(),filter=context.createBiquadFilter(),pan=context.createStereoPanner();
       filter.type='lowpass';filter.frequency.value=3000;gain.connect(filter).connect(pan).connect(context.destination);s={gain,filter,pan,next:0,nodes:new Set()};speakers.set(packet.slot,s);}
