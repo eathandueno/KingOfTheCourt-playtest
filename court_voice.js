@@ -19,7 +19,7 @@
   function gate(){const on=transmitting();if(node && node._on!==on){node._on=on;node.port.postMessage(on);}if(stream)for(const t of stream.getTracks())t.enabled=on;if(!on)pending=[];}
   async function audio(){if(!context)context=new AudioContext();await context.resume();return context;}
   function clearPlayback(){for(const s of speakers.values()){for(const n of s.nodes){try{n.stop();}catch(_){}}s.nodes.clear();s.next=0;}}
-  async function enable(){const token=++epoch;status='Requesting microphoneâ€¦';
+  async function enable(){const token=++epoch;status='Requesting microphone…';
     try{const ctx=await audio();const mic=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
       if(token!==epoch){mic.getTracks().forEach(t=>t.stop());return;}
       stream=mic;stream.getTracks().forEach(t=>t.enabled=false);
@@ -31,8 +31,8 @@
       const low=ctx.createBiquadFilter();low.type='lowpass';low.frequency.value=3100;
       source.connect(high).connect(low).connect(node);const silence=ctx.createGain();silence.gain.value=0;node.connect(silence).connect(ctx.destination);
       node.port.onmessage=e=>{if(!transmitting())return;sent++;pending.push(btoa(String.fromCharCode(...e.data)));if(pending.length>3)pending.shift();};
-      enabled=true;status='Microphone enabled Â· nearby players on BOTH teams hear you';gate();
-    }catch(e){disable();status=e.name==='NotAllowedError'?'Microphone permission denied Â· enable it in browser settings':'Microphone unavailable: '+e.name;}}
+      enabled=true;status='Microphone enabled · nearby players on BOTH teams hear you';gate();
+    }catch(e){disable();status=e.name==='NotAllowedError'?'Microphone permission denied · enable it in browser settings':'Microphone unavailable: '+e.name;}}
   function disable(){epoch++;enabled=false;held=false;pending=[];if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;if(node)node.disconnect();if(source)source.disconnect();node=null;source=null;status='Microphone off';}
   function play(packet){if(!context || muted || !active || silenced.has(packet.slot) || !Number.isInteger(packet.slot) || packet.slot<0 || packet.slot>9)return;
     let bytes;try{bytes=atob(packet.audio);}catch(_){return;}if(bytes.length!==800)return;

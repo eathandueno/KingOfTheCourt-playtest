@@ -153,16 +153,16 @@
           close(id,'Snapshot fragment order mismatch'); return;
         }
         assembly.text += frame.text; assembly.next++;
-        if (assembly.text.length > MAX_PACKET) {close(id,'Message limit exceeded'); return;}
+        if (assembly.text.length > MAX_PACKET) {close(id,'Snapshot size limit exceeded'); return;}
         if (assembly.next < assembly.total) return;
         text = assembly.text; entry.assembly = null;
       } else if (entry.assembly) {close(id,'Incomplete snapshot'); return;}
       const now = performance.now();
       entry.budget = Math.min(480,entry.budget+(now-entry.seen)*.12)-1; entry.seen = now;
       if (typeof text !== 'string' || text.length > (host ? 4096 : MAX_PACKET)) {
-        close(id,'Message limit exceeded'); return;
+        close(id,'Packet size limit exceeded'); return;
       }
-      if (entry.budget < 0) {close(id,'Message limit exceeded'); return;}
+      if (entry.budget < 0) {close(id,'Packet rate limit exceeded'); return;}
       if (text.length < 300 && text.startsWith('{"courtTransportClose":')) {
         try {close(id, JSON.parse(text).courtTransportClose);} catch (_) {close(id,'Connection closed');}
         return;
@@ -178,8 +178,28 @@
       if (!host && text.startsWith('{') && text.includes('"type":"state"') && !text.includes('"stream_revision"')) {
         entry.snapshot = text; return;
       }
+      if (!host && text.includes('"stream_revision"')) {
+        let packet;
+        try {packet=JSON.parse(text);} catch (_) {return;}
+        if (packet.type==='state') {
+          const discardOlderStates=()=>{
+            entry.packets=entry.packets.filter(saved=>{
+              try {return JSON.parse(saved).type!=='state';} catch (_) {return true;}
+            });
+            entry.bytes=entry.packets.reduce((sum,saved)=>sum+saved.length,0);
+          };
+          // A full snapshot supersedes older queued state, while welcome and
+          // other reliable messages must survive a long map/graphics load.
+          if (packet.stream_full===true) {discardOlderStates();entry.awaitFull=false;}
+          else if (entry.awaitFull) return;
+          if (entry.bytes+text.length>MAX_QUEUE || entry.packets.length>=64) {
+            discardOlderStates();entry.awaitFull=packet.stream_full!==true;
+            if (entry.awaitFull) return;
+          }
+        }
+      }
       entry.bytes += text.length;
-      if (entry.bytes > MAX_QUEUE || entry.packets.length >= 64) {close(id,'Message limit exceeded'); return;}
+      if (entry.bytes > MAX_QUEUE || entry.packets.length >= 64) {close(id,'Reliable message queue limit exceeded'); return;}
       entry.packets.push(text);
     });
     conn.on('close', () => {clearTimeout(timer); entry.state = 3; entry.packets = []; entry.bytes = 0; entry.input = ''; entry.snapshot = '';});
@@ -242,6 +262,7 @@
     else launchPeer(sourceSession);
   }
   window.CourtRTC = Object.freeze({
+    async directoryOptions() {await configReady;return JSON.parse(JSON.stringify(activeOptions));},
     startHost() {
       roomKey = [...crypto.getRandomValues(new Uint8Array(24))].map(b => b.toString(16).padStart(2,'0')).join('');
       create(true);

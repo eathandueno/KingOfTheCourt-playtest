@@ -1,7 +1,7 @@
 /* Browser-owned display controls: fullscreen must originate in a user gesture. */
 (() => {
   'use strict';
-  const state = { renderer: '', acceleration: 'Checking GPUâ€¦', fullscreen: false };
+  const state = { renderer: '', acceleration: 'Checking GPU…', fullscreen: false };
   const original = HTMLCanvasElement.prototype.getContext;
   HTMLCanvasElement.prototype.getContext = function (kind, options) {
     const game = this.id === 'canvas' && /^(webgl2?|experimental-webgl)$/.test(kind);
@@ -10,7 +10,7 @@
       const extension = context.getExtension('WEBGL_debug_renderer_info');
       state.renderer = extension ? context.getParameter(extension.UNMASKED_RENDERER_WEBGL) : context.getParameter(context.RENDERER);
       state.acceleration = /swiftshader|llvmpipe|software rasterizer/i.test(state.renderer)
-        ? 'Software rendering detected. Enable graphics acceleration in your browserâ€™s system settings, then relaunch it.'
+        ? 'Software rendering detected. Enable graphics acceleration in your browser’s system settings, then relaunch it.'
         : extension ? 'GPU rendering active' : 'GPU renderer details unavailable';
     }
     return context;
@@ -27,7 +27,7 @@
       else await document.documentElement.requestFullscreen();
       refresh();
     } catch (error) {
-      status.textContent = 'Fullscreen was unavailable. Try the browserâ€™s fullscreen shortcut (F11 on Windows).';
+      status.textContent = 'Fullscreen was unavailable. Try the browser’s fullscreen shortcut (F11 on Windows).';
     }
   }
   function showSettings() { panel.hidden = false; refresh(); fullscreen.focus(); }

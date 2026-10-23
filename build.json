@@ -1,25 +1,29 @@
 {
   "game": "King of the Court",
   "engine": "4.7.1.stable.official.a13da4feb",
-  "source_commit": "465f757d0ab7c0de14c45fd9369b6c75666a9e6d",
+  "source_commit": "efa76122eb42e6ca27be94c617e78440cb243643",
   "working_tree_modified": true,
-  "built_at": "2026-09-13T00:14:59.386225+00:00",
+  "built_at": "2026-10-23T18:42:31.875333+00:00",
   "files": {
     "court_display.js": {
-      "bytes": 4251,
-      "sha256": "0ec616f620d74514f6c89b6841c5b9e59c48d889fa0714a7b1dcbe99dab75383"
+      "bytes": 4245,
+      "sha256": "e7c13251855cde1484c66ec6cade4dd0c1a67b5b4a396138aab29d0d4a4c3ff3"
+    },
+    "court_lobbies.js": {
+      "bytes": 5557,
+      "sha256": "7590c82fefda7f00a367566a72ab5dd585b9e7a73298c7bab15d85174ebdc953"
     },
     "court_rtc.js": {
-      "bytes": 15163,
-      "sha256": "661eb9c2d9ff74839ec201ba04e1aa71ff542024ea5eb38569373e3b9a2b444d"
+      "bytes": 16288,
+      "sha256": "71360276147a31a275e434b6b9bfedfb3664efd6fdbab9f4ef2a8454a16f91a9"
     },
     "court_rtc_config.json": {
       "bytes": 4,
       "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f"
     },
     "court_voice.js": {
-      "bytes": 5972,
-      "sha256": "b2ac8352408b8ed46b65ba2ac18a67af952101540fac76487bcfdd76eff58721"
+      "bytes": 5968,
+      "sha256": "3121f7d0f7b6c667a6ce04c4e763a6e7110fe2ae2a0001db54c66e65b656c024"
     },
     "index.audio.position.worklet.js": {
       "bytes": 2973,
@@ -30,8 +34,8 @@
       "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
     },
     "index.html": {
-      "bytes": 11929,
-      "sha256": "1bc6a9cb008bedf4bdfa79e9abe4e50dd3f7d1648ee4ade9f6a8b04d90d2646f"
+      "bytes": 12276,
+      "sha256": "54d9fa1664b6839b750130f4b47bf37ef9146423238ee4db2c9e333957766784"
     },
     "index.js": {
       "bytes": 279815,
@@ -39,11 +43,35 @@
     },
     "index.pck.gz.part0": {
       "bytes": 67108864,
-      "sha256": "4908e1e46d23b6932fb55ed34e1c17a10c5126f60f4e9c742b7a5c6f6076b03f"
+      "sha256": "9ecdae4f6d1931e8f3c01d337e1a99f60db70afb9222dacf81f07514b5092600"
     },
     "index.pck.gz.part1": {
-      "bytes": 57349670,
-      "sha256": "4d04ef36dc6f490875abb7693407cca4c29eac067a685e29910d51f4549c4800"
+      "bytes": 67108864,
+      "sha256": "be8893d1abc813b8d8dc11abac535d3de2b3a577ab70a23be67b890f8f614886"
+    },
+    "index.pck.gz.part2": {
+      "bytes": 67108864,
+      "sha256": "a1c26f00acac8603a28810f7a9d9136847ecd8333a7ac93c6f3734bb08ad0554"
+    },
+    "index.pck.gz.part3": {
+      "bytes": 67108864,
+      "sha256": "97d88f6bbe821464d1156d34b63204ca0864b949451d53e8eb76a663ba685a87"
+    },
+    "index.pck.gz.part4": {
+      "bytes": 67108864,
+      "sha256": "5f8cb20f42b83015b22b47bf5f1ec9b8820f337e308d2e11edbaf709fdb3a519"
+    },
+    "index.pck.gz.part5": {
+      "bytes": 67108864,
+      "sha256": "b813b7edc9c1105705ec8666989097b368fb587121bc684376cadb5635442019"
+    },
+    "index.pck.gz.part6": {
+      "bytes": 67108864,
+      "sha256": "315633be0bbb437e31b03a9b9ccd462151608214554e93d43300c64f545a22b2"
+    },
+    "index.pck.gz.part7": {
+      "bytes": 41699480,
+      "sha256": "9093b9175e2d37a330c71c92be61ccf6dbe0123a9b64d6ef5dadc993923f50c4"
     },
     "index.png": {
       "bytes": 21443,
@@ -58,8 +86,8 @@
       "sha256": "f692398cb473ab820bae68b8d11dc34067351030b1eb1ce70fb092d56ea0da9e"
     }
   },
-  "gameplay_hash": "a37b8641329d6c18facb88500334539ecdeb42d667d12ca261af69b6a87df7da",
-  "network_protocol": 55,
-  "pack_uncompressed_bytes": 148414372,
+  "gameplay_hash": "65d72cf57aeca61a873c8f254a33ee6165da264dfe7b756275c23ddb64e8f071",
+  "network_protocol": 88,
+  "pack_uncompressed_bytes": 559598268,
   "pack_encoding": "gzip"
 }
